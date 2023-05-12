@@ -26,7 +26,7 @@ tags: [javascript, fetch, dom, getElementID, appendChild]
   const resultContainer = document.getElementById("quiz_result");
 
   // prepare fetch urls
-  const url = "https://www.teamcheeseatimetime.tk/api/quiz";
+  // const url = "";
   const urllocal = "http://localhost:5000/api/quiz" ;
   
   const fetchQuizUrl = `/${subj}/${totalQs}`;
