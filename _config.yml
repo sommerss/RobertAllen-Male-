@@ -6,11 +6,11 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: APCSP
-description: AP Computer Science Principles course materials.
-github_username: nighthawkcoders
+title: RAM
+description: welcome to the site!
+github_username: sommerss
 # you can comment the below line out if your repo name is not different than your baseurl
-github_repo: "APCSP"
+github_repo: "RobertAllen-Male-"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value. 
@@ -34,7 +34,7 @@ url: "https://nighthawkcoders.github.io" # the base hostname & protocol for your
 #
 # 3. You must replace the parameter `baseurl` in _action_files/settings.ini with the same value as you set here but WITHOUT QUOTES.
 #
-baseurl: "/APCSP" # the subpath of your site, e.g. "/blog".
+baseurl: "/ram" # the subpath of your site, e.g. "/blog".
 
 # Github and twitter are optional:
 minima:
@@ -103,6 +103,7 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jemoji
+  - jekyll-remote-theme
 
 
 # See https://jekyllrb.com/docs/pagination/
@@ -110,7 +111,7 @@ plugins:
 paginate: 15
 paginate_path: /page:num/
 
-remote_theme: jekyll/minima
+remote_theme: pages-themes/architect@v0.2.0
 
 titles_from_headings:
   enabled:     true
