@@ -58,20 +58,24 @@
   <div class="container">
     <h1>Getting Started</h1>
     <div class="form-input">
-      <label for="username">Username:</label>
+      <label for="username">username:</label>
       <input type="text" id="username" name="username" placeholder="Enter your username">
     </div>
-    <div class="form-input">
-      <label for="book-title">Book Title:</label>
-      <input type="text" id="book-title" name="book-title" placeholder="Enter book title">
+    <div class="name">
+      <label for="name">name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name">
     </div>
     <div class="form-input">
-      <label for="author">Author:</label>
-      <input type="text" id="author" name="author" placeholder="Enter author name">
+      <label for="book">Book Title:</label>
+      <input type="text" id="book" name="book" placeholder="Enter book title">
     </div>
     <div class="form-input">
-      <label for="current-page">Current Page Number:</label>
-      <input type="text" id="current-page" name="current-page" placeholder="Enter current page number">
+      <label for="finishedate">finishedate:</label>
+      <input type="text" id="finishedate" name="finishedate" placeholder="Enter author name">
+    </div>
+    <div class="form-input">
+      <label for="rating">rating:</label>
+      <input type="text" id="rating" name="rating" placeholder="Enter current page number">
     </div>
     <div class="start-button">
       <button onclick="startReadingLog()">Start Reading Log</button>
@@ -81,22 +85,24 @@
   <script>
     function startReadingLog() {
   var username = document.getElementById("username").value;
-  var bookTitle = document.getElementById("book-title").value;
-  var author = document.getElementById("author").value;
-  var currentPage = document.getElementById("current-page").value;
+  var name = document.getElementById("name").value;
+  var book = document.getElementById("book").value;
+  var finishedate = document.getElementById("finishedate").value;
+  var rating = document.getElementById("rating").value;
 
   var data = {
     username: username,
-    title: bookTitle,
-    author: author,
-    pageNumber: currentPage
+    name: name,
+    book: book,
+    finishedate: finishedate,
+    rating: rating
   };
 
   // Change the location of the browser to the reading log page first
   window.location.href = 'readingTable.html';
 
   // Send the POST request to the backend
-  fetch('http://localhost:3000/reading-log', {
+  fetch('172.20.10.3:8889/api/reader/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
