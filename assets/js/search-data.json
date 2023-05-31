@@ -93,14 +93,6 @@
   
 
   
-      ,"page5": {
-          "title": "",
-          "content": "Objectives . . This Conceptual Framework teaches College Boards 5 Big Ideas of AP Computer Science Principles, Python, JavaScript, and Web Site application development together in an integrated fashion. The purpose is to teach College Board requirements while adding languages, tools, frameworks, and methodologies that meet Career Technical Education (CTE) needs. The outcome is preparing the High School student for the AP Test and simultaneously building the skills required for Computer Science internships. . . Blogs .",
-          "url": "https://nighthawkcoders.github.io/ram/",
-          "relUrl": "/",
-          "date": ""
-      }
-      
   
 
   
@@ -119,10 +111,7 @@
   
 
   
-  
-
-  
-      ,"page12": {
+      ,"page11": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://nighthawkcoders.github.io/ram/robots.txt",

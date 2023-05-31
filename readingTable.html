@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reading Log</title>
+  <style>
+    body {
+      background-color: #F1F5F8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #225378;
+      font-size: 36px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .search label {
+      color: #4F7CAC;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .search select,
+    .search input[type="text"],
+    .search button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #B2DBBF;
+      border-radius: 4px;
+    }
+
+    .search select {
+      margin-right: 10px;
+    }
+
+    .search button {
+      background-color: #225378;
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+    }
+
+    .return-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .return-button button {
+      padding: 12px 24px;
+      font-size: 20px;
+      background-color: #225378;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #B2DBBF;
+    }
+
+    th {
+      background-color: #225378;
+      color: #FFFFFF;
+    }
+
+    tr:nth-child(even) {
+      background-color: #FFFFFF;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #F1F5F8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Reading Log</h1>
+
+  <!-- Return to Home Screen button -->
+  <div class="return-button">
+    <button onclick="returnToHomeScreen()">Return to Home Screen</button>
+  </div>
+
+  <!-- Add the search input box and dropdown menu -->
+  <div>
+    <label for="search-by">Search by:</label>
+    <select id="search-by" name="search-by" title="Select search criteria">
+      <option value="username">username</option>
+      <option value="author">book</option>
+      <option value="title">finishedate</option>
+    </select>
+    <input type="text" id="search-input" placeholder="Enter search keyword">
+    <button onclick="searchEntries()">Search</button>
+  </div>
+
+  <!-- Add the table -->
+  <table id="log-table">
+    <thead>
+      <tr>
+        <th>username</th>
+        <th>name</th>
+        <th>book</th>
+        <th>finishedate</th>
+        <th>rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- The table rows will be populated dynamically with JavaScript -->
+    </tbody>
+  </table>
+
+  <script>
+    function searchEntries() {
+      var searchCategory = document.getElementById("search-category").value;
+      var searchValue = document.getElementById("search-input").value.toLowerCase();
+
+      var table = document.getElementById("log-table");
+      var rows = table.getElementsByTagName("tr");
+
+      for (var i = 1; i < rows.length; i++) {
+        var row = rows[i];
+        var cells = row.getElementsByTagName("td");
+        var cellValue = cells[searchCategory].textContent.toLowerCase();
+
+        if (cellValue.includes(searchValue)) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      }
+    }
+
+    function returnToHomeScreen() {
+      window.location.href = 'index.html';
+    }
+
+    // Fetch and display all reading log entries
+    fetch('http://172.20.10.3:8889/api/reader/')
+      .then(response => response.json())
+      .then(entries => {
+        var tableBody = document.querySelector("#log-table tbody");
+
+        entries.forEach(entry => {
+          var row = document.createElement("tr");
+          var usernameCell = document.createElement("td");
+          var nameCell = document.createElement("td");
+          var bookCell = document.createElement("td");
+          var finishedateCell = document.createElement("td");
+          var rating = document.createElement("td");
+
+          usernameCell.textContent = entry.username;
+          nameCell.textContent = entry.name;
+          bookCell.textContent = entry.book;
+          finishedateCell.textContent = entry.finishedate;
+          ratingCell.textContent = entry.rating;
+
+          row.appendChild(usernameCell);
+          row.appendChild(nameCell);
+          row.appendChild(bookCell);
+          row.appendChild(finishedateCell);
+          row.appendChild(ratingCell);
+
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+</body>
+</html>
