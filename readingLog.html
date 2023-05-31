@@ -80,84 +80,39 @@
 
   <script>
     function startReadingLog() {
+  var username = document.getElementById("username").value;
+  var bookTitle = document.getElementById("book-title").value;
+  var author = document.getElementById("author").value;
+  var currentPage = document.getElementById("current-page").value;
 
-      var username = document.getElementById("username").value;
-      var bookTitle = document.getElementById("book-title").value;
-      var author = document.getElementById("author").value;
-      var currentPage = document.getElementById("current-page").value;
+  var data = {
+    username: username,
+    title: bookTitle,
+    author: author,
+    pageNumber: currentPage
+  };
 
-      // Check for duplicate username
-      fetch('http://localhost:3000/reading-log')
-        .then(response => response.json())
-        .then(entries => {
-          var isDuplicate = entries.some(entry => entry.username.toLowerCase() === username.toLowerCase());
+  // Change the location of the browser to the reading log page first
+  window.location.href = 'readingTable.html';
 
-          if (isDuplicate) {
-            var confirmMessage = "Are you sure you want to update " + username + "'s reading log?";
-            var shouldUpdate = confirm(confirmMessage);
+  // Send the POST request to the backend
+  fetch('http://localhost:3000/reading-log', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(result => {
+      // Handle the response from the backend if needed
+      console.log(result);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
 
-            if (shouldUpdate) {
-              // Proceed with updating the reading log
-              var data = {
-                username: username,
-                title: bookTitle,
-                author: author,
-                pageNumber: currentPage
-              };
-
-              fetch('http://localhost:3000/reading-log', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-              })
-                .then(response => response.json())
-                .then(result => {
-                  // Handle the response from the backend if needed
-                  console.log(result);
-                  // Change the location of the browser to the reading log page
-                  window.location.href = 'readingTable.html';
-                })
-                .catch(error => {
-                  console.error('Error:', error);
-                });
-            } else {
-              // Do not proceed with creating/updating the reading log
-              return;
-            }
-          } else {
-            // Proceed with creating a new reading log entry
-            var data = {
-              username: username,
-              title: bookTitle,
-              author: author,
-              pageNumber: currentPage
-            };
-
-            fetch('http://localhost:3000/reading-log', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-            })
-              .then(response => response.json())
-              .then(result => {
-                // Handle the response from the backend if needed
-                console.log(result);
-                // Change the location of the browser to the reading log page
-                window.location.href = 'readingTable.html';
-              })
-              .catch(error => {
-                console.error('Error:', error);
-              });
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
   </script>
 </body>
 </html>
