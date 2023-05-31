@@ -10,30 +10,72 @@
       padding: 0;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px;
-      text-align: center;
-    }
-
     h1 {
       color: #225378;
       font-size: 36px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 20px;
+    }
+
+    .search label {
+      color: #4F7CAC;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .search select,
+    .search input[type="text"],
+    .search button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #B2DBBF;
+      border-radius: 4px;
+    }
+
+    .search select {
+      margin-right: 10px;
+    }
+
+    .search button {
+      background-color: #225378;
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+    }
+
+    .return-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .return-button button {
+      padding: 12px 24px;
+      font-size: 20px;
+      background-color: #225378;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #FFFFFF;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    th, td {
-      padding: 12px;
+    th,
+    td {
+      padding: 10px;
       text-align: left;
+      border-bottom: 1px solid #B2DBBF;
     }
 
     th {
@@ -42,66 +84,103 @@
     }
 
     tr:nth-child(even) {
+      background-color: #FFFFFF;
+    }
+
+    tr:nth-child(odd) {
       background-color: #F1F5F8;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Reading Log</h1>
-    <table id="reading-log-table">
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Book Title</th>
-          <th>Author</th>
-          <th>Current Page</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+  <h1>Reading Log</h1>
+
+  <!-- Return to Home Screen button -->
+  <div class="return-button">
+    <button onclick="returnToHomeScreen()">Return to Home Screen</button>
   </div>
 
+  <!-- Add the search input box and dropdown menu -->
+  <div>
+    <label for="search-by">Search by:</label>
+    <select id="search-by" name="search-by" title="Select search criteria">
+      <option value="username">Username</option>
+      <option value="author">Author</option>
+      <option value="title">Book Title</option>
+    </select>
+    <input type="text" id="search-input" placeholder="Enter search keyword">
+    <button onclick="searchEntries()">Search</button>
+  </div>
+
+  <!-- Add the table -->
+  <table id="log-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>Current Page</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- The table rows will be populated dynamically with JavaScript -->
+    </tbody>
+  </table>
+
   <script>
-    // Fetch the reading log data from the backend
+    function searchEntries() {
+      var searchCategory = document.getElementById("search-category").value;
+      var searchValue = document.getElementById("search-input").value.toLowerCase();
+
+      var table = document.getElementById("log-table");
+      var rows = table.getElementsByTagName("tr");
+
+      for (var i = 1; i < rows.length; i++) {
+        var row = rows[i];
+        var cells = row.getElementsByTagName("td");
+        var cellValue = cells[searchCategory].textContent.toLowerCase();
+
+        if (cellValue.includes(searchValue)) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      }
+    }
+
+    function returnToHomeScreen() {
+      window.location.href = 'index.html';
+    }
+
+    // Fetch and display all reading log entries
     fetch('http://localhost:3000/reading-log')
       .then(response => response.json())
-      .then(data => {
-        // Call a function to populate the reading log table with the data
-        populateReadingLogTable(data);
+      .then(entries => {
+        var tableBody = document.querySelector("#log-table tbody");
+
+        entries.forEach(entry => {
+          var row = document.createElement("tr");
+          var usernameCell = document.createElement("td");
+          var bookTitleCell = document.createElement("td");
+          var authorCell = document.createElement("td");
+          var currentPageCell = document.createElement("td");
+
+          usernameCell.textContent = entry.username;
+          bookTitleCell.textContent = entry.title;
+          authorCell.textContent = entry.author;
+          currentPageCell.textContent = entry.pageNumber;
+
+          row.appendChild(usernameCell);
+          row.appendChild(bookTitleCell);
+          row.appendChild(authorCell);
+          row.appendChild(currentPageCell);
+
+          tableBody.appendChild(row);
+        });
       })
       .catch(error => {
         console.error('Error:', error);
       });
-
-    function populateReadingLogTable(data) {
-      const tableBody = document.querySelector('#reading-log-table tbody');
-
-      // Loop through the data and create table rows
-      data.forEach(entry => {
-        const row = document.createElement('tr');
-
-        // Create table cells for each field in the entry
-        const usernameCell = document.createElement('td');
-        usernameCell.textContent = entry.username;
-        row.appendChild(usernameCell);
-
-        const bookTitleCell = document.createElement('td');
-        bookTitleCell.textContent = entry.title;
-        row.appendChild(bookTitleCell);
-
-        const authorCell = document.createElement('td');
-        authorCell.textContent = entry.author;
-        row.appendChild(authorCell);
-
-        const currentPageCell = document.createElement('td');
-        currentPageCell.textContent = entry.pageNumber;
-        row.appendChild(currentPageCell);
-
-        // Append the row to the table body
-        tableBody.appendChild(row);
-      });
-    }
   </script>
 </body>
 </html>
