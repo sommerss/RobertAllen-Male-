@@ -1,28 +1,72 @@
----
-layout: home
-image: images/logo.png
----
-## Objectives
-
-<div>
-
-    <div style="float: left; margin: 0px 10px 10px 0px;">
-        <a href="https://docs.google.com/document/d/1ibm_4fqSgfnRZKhUns2vVe83MVes70Ts/edit?usp=sharing&ouid=115023546255406346351&rtpof=true&sd=true">
-            <img atl="Course Framework" src="{{site.baseurl}}/images/apcsp.png" title="Course Framework inspired by Domingo David"
-            width="200">
-        </a>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Worm Reading Log</title>
+  <style>
+    body {
+      background-color: #F1F5F8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      width: 140px; /* Adjusted width */
+      margin-right: 10px;
+    }
+    .logo img:first-child {
+      transform: scaleX(-1);
+    }
+    h1 {
+      color: #225378;
+      font-size: 48px; /* Adjusted font size */
+      margin-bottom: 10px;
+    }
+    p {
+      color: #4F7CAC;
+      font-size: 24px; /* Adjusted font size */
+      line-height: 1.5;
+    }
+    .get-started-button {
+      margin-top: 40px;
+    }
+    .get-started-button button {
+      padding: 16px 32px; /* Adjusted padding */
+      font-size: 28px; /* Adjusted font size */
+      background-color: #225378;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="Screen_Shot_2023-05-30_at_9.14.37_PM-removebg-preview.png" alt="Clip Art" style="transform: scaleX(-1); width: 140px;">
+      <h1>Book Worm Reading Log</h1>
+      <img src="Screen_Shot_2023-05-30_at_9.14.37_PM-removebg-preview.png" alt="Clip Art" style="width: 140px;">
     </div>
-    <div>
-        <hr>
-        <p>
-            This Conceptual Framework teaches College Boards 5 Big Ideas of AP Computer Science Principles, Python, JavaScript, and Web Site application development together in an integrated fashion.  The purpose is to teach College Board requirements while adding languages, tools, frameworks, and methodologies that meet Career Technical Education (CTE) needs.  The outcome is preparing the High School student for the AP Test and simultaneously building the skills required for Computer Science internships.
-        </p>
-        <hr>
+    <p>Track your reading progress with ease! Log your daily reading by entering the book title, author, current page number, and your name. Stay organized and motivated on your reading journey.</p>
+    <div class="get-started-button">
+      <button onclick="window.location.href='readingLog.html'">Get Started!</button>
     </div>
-
-</div>
-
-
-## Blogs
-
-
+  </div>
+</body>
+</html>

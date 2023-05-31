@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Getting Started</title>
+  <style>
+    body {
+      background-color: #F1F5F8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h1 {
+      color: #225378;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .form-input {
+      margin-bottom: 20px;
+    }
+    .form-input label {
+      display: block;
+      color: #4F7CAC;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .form-input input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #B2DBBF;
+      border-radius: 4px;
+    }
+    .start-button {
+      margin-top: 20px;
+    }
+    .start-button button {
+      padding: 12px 24px;
+      font-size: 20px;
+      background-color: #225378;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Getting Started</h1>
+    <div class="form-input">
+      <label for="username">username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username">
+    </div>
+    <div class="name">
+      <label for="name">name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name">
+    </div>
+    <div class="form-input">
+      <label for="book">Book Title:</label>
+      <input type="text" id="book" name="book" placeholder="Enter book title">
+    </div>
+    <div class="form-input">
+      <label for="finishedate">finishedate:</label>
+      <input type="text" id="finishedate" name="finishedate" placeholder="Enter author name">
+    </div>
+    <div class="form-input">
+      <label for="rating">rating:</label>
+      <input type="text" id="rating" name="rating" placeholder="Enter current page number">
+    </div>
+    <div class="start-button">
+      <button onclick="startReadingLog()">Start Reading Log</button>
+    </div>
+  </div>
+
+  <script>
+    function startReadingLog() {
+  var username = document.getElementById("username").value;
+  var name = document.getElementById("name").value;
+  var book = document.getElementById("book").value;
+  var finishedate = document.getElementById("finishedate").value;
+  var rating = document.getElementById("rating").value;
+
+  var data = {
+    username: username,
+    name: name,
+    book: book,
+    finishedate: finishedate,
+    rating: rating
+  };
+
+  // Change the location of the browser to the reading log page first
+  window.location.href = 'readingTable.html';
+
+  // Send the POST request to the backend
+  fetch('172.20.10.3:8889/api/reader/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(result => {
+      // Handle the response from the backend if needed
+      console.log(result);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+  </script>
+</body>
+</html>
