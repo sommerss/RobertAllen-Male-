@@ -104,9 +104,9 @@
   <div>
     <label for="search-by">Search by:</label>
     <select id="search-by" name="search-by" title="Select search criteria">
-      <option value="username">Username</option>
-      <option value="author">Author</option>
-      <option value="title">Book Title</option>
+      <option value="username">username</option>
+      <option value="author">book</option>
+      <option value="title">finishedate</option>
     </select>
     <input type="text" id="search-input" placeholder="Enter search keyword">
     <button onclick="searchEntries()">Search</button>
@@ -116,10 +116,11 @@
   <table id="log-table">
     <thead>
       <tr>
-        <th>Username</th>
-        <th>Book Title</th>
-        <th>Author</th>
-        <th>Current Page</th>
+        <th>username</th>
+        <th>name</th>
+        <th>book</th>
+        <th>finishedate</th>
+        <th>rating</th>
       </tr>
     </thead>
     <tbody>
@@ -153,7 +154,7 @@
     }
 
     // Fetch and display all reading log entries
-    fetch('http://localhost:3000/reading-log')
+    fetch('http://172.20.10.3:8889/api/reader/')
       .then(response => response.json())
       .then(entries => {
         var tableBody = document.querySelector("#log-table tbody");
@@ -161,19 +162,22 @@
         entries.forEach(entry => {
           var row = document.createElement("tr");
           var usernameCell = document.createElement("td");
-          var bookTitleCell = document.createElement("td");
-          var authorCell = document.createElement("td");
-          var currentPageCell = document.createElement("td");
+          var nameCell = document.createElement("td");
+          var bookCell = document.createElement("td");
+          var finishedateCell = document.createElement("td");
+          var rating = document.createElement("td");
 
           usernameCell.textContent = entry.username;
-          bookTitleCell.textContent = entry.title;
-          authorCell.textContent = entry.author;
-          currentPageCell.textContent = entry.pageNumber;
+          nameCell.textContent = entry.name;
+          bookCell.textContent = entry.book;
+          finishedateCell.textContent = entry.finishedate;
+          ratingCell.textContent = entry.rating;
 
           row.appendChild(usernameCell);
-          row.appendChild(bookTitleCell);
-          row.appendChild(authorCell);
-          row.appendChild(currentPageCell);
+          row.appendChild(nameCell);
+          row.appendChild(bookCell);
+          row.appendChild(finishedateCell);
+          row.appendChild(ratingCell);
 
           tableBody.appendChild(row);
         });
