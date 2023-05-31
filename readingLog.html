@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Getting Started</title>
+  <style>
+    body {
+      background-color: #F1F5F8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h1 {
+      color: #225378;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .username-input {
+      margin-bottom: 20px;
+    }
+    .username-input label {
+      display: block;
+      color: #4F7CAC;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .username-input input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #B2DBBF;
+      border-radius: 4px;
+    }
+    .start-button {
+      margin-top: 20px;
+    }
+    .start-button button {
+      padding: 12px 24px;
+      font-size: 20px;
+      background-color: #225378;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Getting Started</h1>
+    <div class="username-input">
+      <label for="username">Enter your username:</label>
+      <input type="text" id="username" name="username" placeholder="Username">
+    </div>
+    <div class="start-button">
+      <button onclick="startReadingLog()">Start Reading Log</button>
+    </div>
+  </div>
+
+  <script>
+    function startReadingLog() {
+      var username = document.getElementById("username").value;
+      // You can perform any further action here, such as redirecting to another page or saving the username in a variable.
+      console.log("Username:", username);
+    }
+  </script>
+</body>
+</html>
