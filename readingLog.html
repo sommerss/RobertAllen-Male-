@@ -85,11 +85,28 @@
       var author = document.getElementById("author").value;
       var currentPage = document.getElementById("current-page").value;
 
-      // Perform any action with the entered details here, such as redirecting to another page or saving them.
-      console.log("Username:", username);
-      console.log("Book Title:", bookTitle);
-      console.log("Author:", author);
-      console.log("Current Page:", currentPage);
+      var data = {
+        username: username,
+        title: bookTitle,
+        author: author,
+        pageNumber: currentPage
+      };
+
+      fetch('http://localhost:3000/reading-log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(result => {
+          // Handle the response from the backend if needed
+          console.log(result);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     }
   </script>
 </body>
