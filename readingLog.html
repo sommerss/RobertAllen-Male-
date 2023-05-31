@@ -24,16 +24,16 @@
       font-size: 36px;
       margin-bottom: 20px;
     }
-    .username-input {
+    .form-input {
       margin-bottom: 20px;
     }
-    .username-input label {
+    .form-input label {
       display: block;
       color: #4F7CAC;
       font-size: 18px;
       margin-bottom: 10px;
     }
-    .username-input input[type="text"] {
+    .form-input input[type="text"] {
       width: 100%;
       padding: 10px;
       font-size: 16px;
@@ -57,9 +57,21 @@
 <body>
   <div class="container">
     <h1>Getting Started</h1>
-    <div class="username-input">
-      <label for="username">Enter your username:</label>
-      <input type="text" id="username" name="username" placeholder="Username">
+    <div class="form-input">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username">
+    </div>
+    <div class="form-input">
+      <label for="book-title">Book Title:</label>
+      <input type="text" id="book-title" name="book-title" placeholder="Enter book title">
+    </div>
+    <div class="form-input">
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" placeholder="Enter author name">
+    </div>
+    <div class="form-input">
+      <label for="current-page">Current Page Number:</label>
+      <input type="text" id="current-page" name="current-page" placeholder="Enter current page number">
     </div>
     <div class="start-button">
       <button onclick="startReadingLog()">Start Reading Log</button>
@@ -69,8 +81,15 @@
   <script>
     function startReadingLog() {
       var username = document.getElementById("username").value;
-      // You can perform any further action here, such as redirecting to another page or saving the username in a variable.
+      var bookTitle = document.getElementById("book-title").value;
+      var author = document.getElementById("author").value;
+      var currentPage = document.getElementById("current-page").value;
+
+      // Perform any action with the entered details here, such as redirecting to another page or saving them.
       console.log("Username:", username);
+      console.log("Book Title:", bookTitle);
+      console.log("Author:", author);
+      console.log("Current Page:", currentPage);
     }
   </script>
 </body>
