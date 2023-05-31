@@ -154,7 +154,7 @@
     }
 
     // Fetch and display all reading log entries
-    fetch('http://172.20.10.3:8889/api/reader/')
+    fetch('http://10.131.128.199:8889/api/reader/')
       .then(response => response.json())
       .then(entries => {
         var tableBody = document.querySelector("#log-table tbody");
