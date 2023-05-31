@@ -81,6 +81,22 @@
       <button onclick="startReadingLog()">Start Reading Log</button>
     </div>
   </div>
+  
+  async function startLog() {
+  const APIUrl = 'http://localhost:8889/api/reader';
+  const result = await fetch(`${APIUrl}`);
+  const data = await result.json();
+  
+  const { username, user, book, finishedate, rating } = data;
+
+  // Do whatever you need with the retrieved data
+  console.log('Username:', username);
+  console.log('User:', user);
+  console.log('Book:', book);
+  console.log('Finish Date:', finishedate);
+  console.log('Rating:', rating);
+}
+
 
   <script>
     function startReadingLog() {
