@@ -71,7 +71,7 @@ function addBook(event) {
         rating: rating
     };
 
-    fetch("http://ramdankss.duckdns.org/api/readers", {
+    fetch("http://172.20.10.3:8889/api/reader/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
