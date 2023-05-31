@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reading Log</title>
+  <style>
+    body {
+      background-color: #F1F5F8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #225378;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #225378;
+      color: #FFFFFF;
+    }
+
+    tr:nth-child(even) {
+      background-color: #F1F5F8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reading Log</h1>
+    <table id="reading-log-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Book Title</th>
+          <th>Author</th>
+          <th>Current Page</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    // Fetch the reading log data from the backend
+    fetch('http://localhost:3000/reading-log')
+      .then(response => response.json())
+      .then(data => {
+        // Call a function to populate the reading log table with the data
+        populateReadingLogTable(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    function populateReadingLogTable(data) {
+      const tableBody = document.querySelector('#reading-log-table tbody');
+
+      // Loop through the data and create table rows
+      data.forEach(entry => {
+        const row = document.createElement('tr');
+
+        // Create table cells for each field in the entry
+        const usernameCell = document.createElement('td');
+        usernameCell.textContent = entry.username;
+        row.appendChild(usernameCell);
+
+        const bookTitleCell = document.createElement('td');
+        bookTitleCell.textContent = entry.title;
+        row.appendChild(bookTitleCell);
+
+        const authorCell = document.createElement('td');
+        authorCell.textContent = entry.author;
+        row.appendChild(authorCell);
+
+        const currentPageCell = document.createElement('td');
+        currentPageCell.textContent = entry.pageNumber;
+        row.appendChild(currentPageCell);
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>

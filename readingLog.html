@@ -80,6 +80,7 @@
 
   <script>
     function startReadingLog() {
+
       var username = document.getElementById("username").value;
       var bookTitle = document.getElementById("book-title").value;
       var author = document.getElementById("author").value;
@@ -103,6 +104,8 @@
         .then(result => {
           // Handle the response from the backend if needed
           console.log(result);
+          // Change the location of the browser to the reading log page
+          window.location.href = 'readingTable.html';
         })
         .catch(error => {
           console.error('Error:', error);
