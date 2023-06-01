@@ -83,7 +83,7 @@
   </div>
   
   async function startLog() {
-  const APIUrl = 'http://localhost:8889/api/reader';
+  const APIUrl = '/api/reader';
   const result = await fetch(`${APIUrl}`);
   const data = await result.json();
   
@@ -118,7 +118,7 @@
   window.location.href = 'readingTable.html';
 
   // Send the POST request to the backend
-  fetch('http://localhost:8889/api/reader', {
+  fetch('/api/reader', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
