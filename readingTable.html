@@ -153,38 +153,69 @@
       window.location.href = 'index.html';
     }
 
-    // Fetch and display all reading log entries
-    fetch('http://localhost:8889/api/reader')
-      .then(response => response.json())
-      .then(entries => {
-        var tableBody = document.querySelector("#log-table tbody");
+   // Define the API URL
+const apiUrl = 'http://localhost:8889/api/reader/';
 
-        entries.forEach(entry => {
-          var row = document.createElement("tr");
-          var usernameCell = document.createElement("td");
-          var nameCell = document.createElement("td");
-          var bookCell = document.createElement("td");
-          var finishedateCell = document.createElement("td");
-          var rating = document.createElement("td");
+// Function to fetch reading log entries from the API
+async function fetchReadingLogEntries() {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Failed to fetch reading log entries');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    return [];
+  }
+}
 
-          usernameCell.textContent = entry.username;
-          nameCell.textContent = entry.name;
-          bookCell.textContent = entry.book;
-          finishedateCell.textContent = entry.finishedate;
-          ratingCell.textContent = entry.rating;
+// Function to render reading log entries in the table
+function renderReadingLogEntries(entries) {
+  const tableBody = document.querySelector("#log-table tbody");
+  tableBody.innerHTML = ""; // Clear the table body
 
-          row.appendChild(usernameCell);
-          row.appendChild(nameCell);
-          row.appendChild(bookCell);
-          row.appendChild(finishedateCell);
-          row.appendChild(ratingCell);
+  entries.forEach(entry => {
+    const row = document.createElement("tr");
+    const usernameCell = document.createElement("td");
+    const userCell = document.createElement("td");
+    const bookCell = document.createElement("td");
+    const finishedateCell = document.createElement("td");
+    const ratingCell = document.createElement("td");
 
-          tableBody.appendChild(row);
+    usernameCell.textContent = entry.username;
+    userCell.textContent = entry.user;
+    bookCell.textContent = entry.book;
+    finishedateCell.textContent = entry.finishedate;
+    ratingCell.textContent = entry.rating;
+
+    row.appendChild(usernameCell);
+    row.appendChild(userCell);
+    row.appendChild(bookCell);
+    row.appendChild(finishedateCell);
+    row.appendChild(ratingCell);
+
+    tableBody.appendChild(row);
+    
+    
         });
       })
       .catch(error => {
         console.error('Error:', error);
       });
+  });
+}
+
+// Function to load and render reading log entries
+async function loadReadingLogEntries() {
+  const entries = await fetchReadingLogEntries();
+  renderReadingLogEntries(entries);
+}
+
+// Call the function to load and render reading log entries
+loadReadingLogEntries();
+
   </script>
 </body>
 </html>
